@@ -1,6 +1,6 @@
-import React from "react";
-
-type Props = {};
+type Props = {
+  comments: Array<string>;
+};
 
 const Comments = (props: Props) => {
   return <div>Comments</div>;

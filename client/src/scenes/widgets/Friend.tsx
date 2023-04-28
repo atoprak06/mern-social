@@ -1,5 +1,5 @@
 import FlexBetween from "@/components/FlexBetween";
-import { FriendInterface } from "@/state/types";
+import { FriendInterface } from "@/api/types";
 import { Avatar, Box, IconButton, Typography, useTheme } from "@mui/material";
 import PersonRemoveOutlinedIcon from "@mui/icons-material/PersonRemoveOutlined";
 import { useAddFriendMutation } from "@/api";

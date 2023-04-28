@@ -7,7 +7,7 @@ import Feeds from "../widgets/Feeds";
 import WhatsOnYourMind from "../widgets/WhatsOnYourMind";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { StateInterface } from "@/state/types";
+import { StateInterface } from "@/api/types";
 
 const ProfilePageGridBigScreen = `
 "a a b b b "

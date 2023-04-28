@@ -18,11 +18,13 @@ import {
   useVerifyTokenQuery,
 } from "@/api";
 import { useSelector } from "react-redux";
-import { StateInterface, UserInterface } from "@/state/types";
+import { GetPostInterface, StateInterface } from "@/api/types";
 import Comments from "./Comments";
 import { Link } from "react-router-dom";
 
-type Props = {};
+type Props = {
+  post: GetPostInterface;
+};
 
 const Feed = (props: Props) => {
   const { post } = props;
@@ -111,7 +113,7 @@ const Feed = (props: Props) => {
                 sx={{
                   fontSize: "24px",
                   color:
-                    data?.user._id in post.likes
+                    data && data.user._id in post.likes
                       ? theme.palette.primary.main
                       : "",
                 }}

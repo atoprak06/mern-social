@@ -1,5 +1,5 @@
 import FlexBetween from "@/components/FlexBetween";
-import { StateInterface, UserInterface } from "@/state/types";
+import { UserInterface } from "@/api/types";
 import { Avatar, Box, Divider, Typography, useTheme } from "@mui/material";
 import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
 import LocationOnOutlinedIcon from "@mui/icons-material/LocationOnOutlined";
@@ -10,8 +10,8 @@ import EditTwoToneIcon from "@mui/icons-material/EditTwoTone";
 import { Link } from "react-router-dom";
 
 type Props = {
-  user: UserInterface;
-  isOwner?: boolean;
+  user?: UserInterface;
+  isOwner: boolean;
 };
 
 const Profile = (props: Props) => {
@@ -30,13 +30,13 @@ const Profile = (props: Props) => {
       <FlexBetween>
         <Box sx={{ display: "flex", gap: "1rem" }}>
           <Avatar
-            src={`${import.meta.env.VITE_BASE_URL}/assets/${user.picturePath}`}
-            alt={user.picturePath}
+            src={`${import.meta.env.VITE_BASE_URL}/assets/${user?.picturePath}`}
+            alt={user?.picturePath}
             sx={{ height: imageSize, width: imageSize }}
           />
           <Box>
             <Link
-              to={`/profile/${user._id}`}
+              to={`/profile/${user?._id}`}
               style={{
                 fontWeight: 500,
                 textDecoration: "none",
@@ -44,10 +44,10 @@ const Profile = (props: Props) => {
                 fontSize: "1.4rem",
               }}
             >
-              {user.firstName} {user.lastName}
+              {user?.firstName} {user?.lastName}
             </Link>
             <Typography variant="h6" color={theme.palette.neutral.main}>
-              {user.friends.length} friends
+              {user?.friends.length} friends
             </Typography>
           </Box>
         </Box>
@@ -58,13 +58,13 @@ const Profile = (props: Props) => {
         <Box display={"flex"} alignItems={"center"} gap={"1rem"}>
           <LocationOnOutlinedIcon sx={{ fontSize: "35px" }} />
           <Typography variant="h5" color={theme.palette.neutral.main}>
-            {user.location}
+            {user?.location}
           </Typography>
         </Box>
         <Box display={"flex"} alignItems={"center"} gap={"1rem"}>
           <WorkOutlineOutlinedIcon sx={{ fontSize: "35px" }} />
           <Typography variant="h5" color={theme.palette.neutral.main}>
-            {user.occupation}
+            {user?.occupation}
           </Typography>
         </Box>
       </Box>
@@ -82,7 +82,7 @@ const Profile = (props: Props) => {
                 fontWeight={500}
                 color={theme.palette.neutral.main}
               >
-                {user.viewedProfile}
+                {user?.viewedProfile}
               </Typography>
             </FlexBetween>
             <FlexBetween>
@@ -94,7 +94,7 @@ const Profile = (props: Props) => {
                 fontWeight={500}
                 color={theme.palette.neutral.main}
               >
-                {user.impressions}
+                {user?.impressions}
               </Typography>
             </FlexBetween>
           </Box>

@@ -3,7 +3,7 @@ import { Box, Typography } from "@mui/material";
 import Feed from "./Feed";
 
 type Props = {
-  userId: string;
+  userId?: string;
 };
 
 const Feeds = (props: Props) => {
@@ -18,7 +18,7 @@ const Feeds = (props: Props) => {
     return <Typography>Error fetching feeds.</Typography>;
   }
 
-  const feeds = data.map((post) => {
+  const feeds = data?.map((post) => {
     return <Feed key={post._id} post={post} />;
   });
 

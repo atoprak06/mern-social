@@ -4,7 +4,7 @@ import { useVerifyTokenQuery } from "@/api";
 import WhatsOnYourMind from "../widgets/WhatsOnYourMind";
 import Feeds from "../widgets/Feeds";
 import { useSelector } from "react-redux";
-import { StateInterface } from "@/state/types";
+import { StateInterface } from "@/api/types";
 import Advertisement from "../widgets/Advertisement";
 import Friends from "../widgets/Friends";
 
@@ -48,7 +48,7 @@ const HomePage = () => {
         gap={"2rem"}
       >
         <Box gridArea={"a"}>
-          <Profile user={data?.user} isOwner={true} />
+          <Profile user={data && data?.user} isOwner={true} />
         </Box>
 
         <Box

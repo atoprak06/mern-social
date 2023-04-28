@@ -17,11 +17,11 @@ import GifIcon from "@mui/icons-material/Gif";
 import AttachFileIcon from "@mui/icons-material/AttachFile";
 import MicIcon from "@mui/icons-material/Mic";
 import React, { useState } from "react";
-import { UserInterface } from "@/state/types";
+import { UserInterface } from "@/api/types";
 import { usePostPostMutation } from "@/api";
 
 type Props = {
-  user: UserInterface;
+  user?: UserInterface;
 };
 
 const WhatsOnYourMind = (props: Props) => {
@@ -39,7 +39,7 @@ const WhatsOnYourMind = (props: Props) => {
   const [post, isLoading] = usePostPostMutation();
   const handlePost = async () => {
     const formData = new FormData();
-    formData.append("userId", user._id);
+    formData.append("userId", user?._id || "");
     formData.append("description", postText);
     if (picture) {
       formData.append("picturePath", picture);
@@ -65,7 +65,7 @@ const WhatsOnYourMind = (props: Props) => {
       <FlexBetween gap={"1rem"}>
         <Avatar
           sx={{ height: imageSize, width: imageSize }}
-          src={`${import.meta.env.VITE_BASE_URL}/assets/${user.picturePath}`}
+          src={`${import.meta.env.VITE_BASE_URL}/assets/${user?.picturePath}`}
         ></Avatar>
         <TextField
           value={postText}

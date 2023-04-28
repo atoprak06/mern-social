@@ -1,6 +1,5 @@
 import FlexBetween from "@/components/FlexBetween";
 import { Box, CardMedia, Typography, useTheme } from "@mui/material";
-import React from "react";
 import { Link } from "react-router-dom";
 
 type Props = {};

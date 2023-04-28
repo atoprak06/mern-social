@@ -11,7 +11,7 @@ import HomePage from "@/scenes/homePage";
 import ProfilePage from "./scenes/profilePage";
 import LoginPage from "@/scenes/loginPage/";
 import { useSelector } from "react-redux";
-import { StateInterface } from "./state/types";
+import { StateInterface } from "@/api/types";
 import { useEffect, useMemo, useState } from "react";
 import { useVerifyTokenQuery } from "./api";
 import Navbar from "./scenes/navbar";

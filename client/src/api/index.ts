@@ -1,11 +1,15 @@
 import {
+  FriendInterface,
   PostInterface,
   StateInterface,
   UserInterface,
-  VeriyTokenInterface,
-} from "./../state/types";
+  VerifyTokenInterface,
+  LoginInterface,
+  LoginInterfaceUser,
+  GetPostInterface,
+  VerifyTokenQueryInterface,
+} from "@/api/types";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { LoginInterface, LoginInterfaceUser } from "./types";
 
 export const api = createApi({
   reducerPath: "api",
@@ -19,6 +23,7 @@ export const api = createApi({
       return headers;
     },
   }),
+  tagTypes: ["posts", "verifyToken", "getUser", "getUserFriends"],
   endpoints: (builder) => ({
     login: builder.mutation<LoginInterface, LoginInterfaceUser>({
       query: (values) => ({
@@ -34,7 +39,7 @@ export const api = createApi({
         body: formData,
       }),
     }),
-    getFeeds: builder.query<void, void>({
+    getFeeds: builder.query<Array<GetPostInterface>, string>({
       query: (userId = "") =>
         `/posts/${userId}${userId.length > 0 ? "/posts" : ""}`,
       providesTags: ["posts"],
@@ -47,7 +52,7 @@ export const api = createApi({
       }),
       invalidatesTags: ["posts"],
     }),
-    likeDislikePost: builder.mutation<void, void>({
+    likeDislikePost: builder.mutation<GetPostInterface, string>({
       query: (postId) => ({
         url: `posts/${postId}/like`,
         method: "PATCH",
@@ -61,7 +66,7 @@ export const api = createApi({
       }),
       invalidatesTags: ["posts", "verifyToken", "getUserFriends"],
     }),
-    getUserFriends: builder.query({
+    getUserFriends: builder.query<Array<FriendInterface>, string>({
       query: (userId) => `users/${userId}/friends`,
       providesTags: ["getUserFriends"],
     }),
@@ -69,10 +74,12 @@ export const api = createApi({
       query: (userId) => `users/${userId}`,
       providesTags: ["getUser"],
     }),
-    verifyToken: builder.query<VeriyTokenInterface, { skip?: boolean }>({
-      query: () => `/verifyToken`,
-      providesTags: ["verifyToken"],
-    }),
+    verifyToken: builder.query<VerifyTokenInterface, VerifyTokenQueryInterface>(
+      {
+        query: () => `/verifyToken`,
+        providesTags: ["verifyToken"],
+      }
+    ),
   }),
 });
 

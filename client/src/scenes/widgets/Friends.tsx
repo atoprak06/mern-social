@@ -1,16 +1,15 @@
 import { Box, Typography, useTheme } from "@mui/material";
-import React from "react";
 import Friend from "./Friend";
 import { useGetUserFriendsQuery } from "@/api";
 
 type Props = {
-  userId: string;
+  userId?: string;
   isOwner: boolean;
 };
 
 const Friends = (props: Props) => {
   const { userId, isOwner } = props;
-  const { data, isLoading, isError } = useGetUserFriendsQuery(userId);
+  const { data, isLoading, isError } = useGetUserFriendsQuery(userId || "");
   const theme = useTheme();
 
   if (isLoading) return <Typography variant="h5">Friends Loading..</Typography>;
@@ -18,11 +17,11 @@ const Friends = (props: Props) => {
     return (
       <Typography variant="h5">Error while fetching user friends..</Typography>
     );
-  const allFriends = data.map((friend) => (
+  const allFriends = data?.map((friend) => (
     <Friend
       key={friend._id}
       friend={friend}
-      userId={userId}
+      userId={userId || ""}
       isOwner={isOwner}
     />
   ));
@@ -40,7 +39,7 @@ const Friends = (props: Props) => {
       <Typography variant="h3" fontWeight={700}>
         Friends
       </Typography>
-      {allFriends.length > 0 ? (
+      {allFriends && allFriends.length > 0 ? (
         allFriends
       ) : (
         <Typography variant="h6">No friends yet..</Typography>
