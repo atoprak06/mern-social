@@ -8,6 +8,7 @@ import WhatsOnYourMind from "../widgets/WhatsOnYourMind";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { StateInterface } from "@/api/types";
+import Loading from "@/components/Loading";
 
 const ProfilePageGridBigScreen = `
 "a a b b b "
@@ -34,7 +35,7 @@ const ProfilePage = () => {
   }, [token, User, VerifyToken]);
 
   if (isLoading) {
-    return <Typography variant="h1">Loading User Page..</Typography>;
+    return <Loading />;
   }
 
   if (isError) {

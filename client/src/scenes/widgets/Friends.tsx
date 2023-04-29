@@ -1,6 +1,7 @@
 import { Box, Typography, useTheme } from "@mui/material";
 import Friend from "./Friend";
 import { useGetUserFriendsQuery } from "@/api";
+import Loading from "@/components/Loading";
 
 type Props = {
   userId?: string;
@@ -12,7 +13,7 @@ const Friends = (props: Props) => {
   const { data, isLoading, isError } = useGetUserFriendsQuery(userId || "");
   const theme = useTheme();
 
-  if (isLoading) return <Typography variant="h5">Friends Loading..</Typography>;
+  if (isLoading) return <Loading />;
   if (isError)
     return (
       <Typography variant="h5">Error while fetching user friends..</Typography>

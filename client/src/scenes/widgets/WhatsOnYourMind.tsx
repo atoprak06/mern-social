@@ -19,6 +19,7 @@ import MicIcon from "@mui/icons-material/Mic";
 import React, { useState } from "react";
 import { UserInterface } from "@/api/types";
 import { usePostPostMutation } from "@/api";
+import Loading from "@/components/Loading";
 
 type Props = {
   user?: UserInterface;
@@ -53,7 +54,7 @@ const WhatsOnYourMind = (props: Props) => {
   };
 
   return !isLoading ? (
-    <Typography variant="h4">Posting..</Typography>
+    <Loading />
   ) : (
     <Box
       sx={{

@@ -7,6 +7,7 @@ import { useSelector } from "react-redux";
 import { StateInterface } from "@/api/types";
 import Advertisement from "../widgets/Advertisement";
 import Friends from "../widgets/Friends";
+import Loading from "@/components/Loading";
 
 const HomePageGridBigScreen = `
 "a a b b b c c"
@@ -18,15 +19,14 @@ const HomePage = () => {
   const token = useSelector<StateInterface>(
     (state) => state.persistedReducer.token
   ) as string;
-  let { data, isLoading, isError } = useVerifyTokenQuery({
+  const { data, isLoading, isError } = useVerifyTokenQuery({
     skip: !token,
     queryKey: ["verifyToken", token],
     // set force to true to force a fresh query fetch
     force: true,
   });
 
-  if (isLoading)
-    return <Typography variant="h1">Loading HomePage..</Typography>;
+  if (isLoading) return <Loading />;
   if (isError)
     return <Typography variant="h1">Error when fetching user data</Typography>;
 

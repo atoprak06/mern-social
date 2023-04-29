@@ -4,7 +4,6 @@ import {
   createTheme,
   PaletteMode,
   CssBaseline,
-  Typography,
 } from "@mui/material";
 import { themeSettings } from "./theme";
 import HomePage from "@/scenes/homePage";
@@ -15,6 +14,7 @@ import { StateInterface } from "@/api/types";
 import { useEffect, useMemo, useState } from "react";
 import { useVerifyTokenQuery } from "./api";
 import Navbar from "./scenes/navbar";
+import Loading from "./components/Loading";
 
 function App() {
   const mode = useSelector<StateInterface>(
@@ -36,7 +36,7 @@ function App() {
     } else setIsLogged(false);
   }, [token, data]);
 
-  if (isLoading) return <Typography>Loading App..</Typography>;
+  if (isLoading) return <Loading />;
 
   return (
     <div className="app">

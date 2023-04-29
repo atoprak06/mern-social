@@ -21,6 +21,8 @@ import { useSelector } from "react-redux";
 import { GetPostInterface, StateInterface } from "@/api/types";
 import Comments from "./Comments";
 import { Link } from "react-router-dom";
+import { useState } from "react";
+import AddComment from "./AddComment";
 
 type Props = {
   post: GetPostInterface;
@@ -41,6 +43,7 @@ const Feed = (props: Props) => {
     // set force to true to force a fresh query fetch
     force: true,
   });
+  const [showComments, setShowComments] = useState(false);
   const isUserOwnPost = token && post.userId === data?.user._id;
   const isAlreadyFriend = token && data?.user.friends.includes(post.userId);
 
@@ -124,7 +127,7 @@ const Feed = (props: Props) => {
             </Typography>
           </Box>
           <Box display={"flex"} alignItems={"center"}>
-            <IconButton>
+            <IconButton onClick={() => setShowComments(!showComments)}>
               <ChatBubbleOutlineOutlinedIcon sx={{ fontSize: "24px" }} />
             </IconButton>
             <Typography variant="h6">{post.comments.length}</Typography>
@@ -135,7 +138,8 @@ const Feed = (props: Props) => {
         </IconButton>
       </FlexBetween>
       <Divider />
-      <Comments comments={post.comments} />
+      {showComments && <Comments postId={post._id} userId={data?.user._id} />}
+      <AddComment postId={post._id} />
     </Box>
   );
 };

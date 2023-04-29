@@ -8,6 +8,7 @@ import {
   LoginInterfaceUser,
   GetPostInterface,
   VerifyTokenQueryInterface,
+  GetCommentsInterface,
 } from "@/api/types";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
@@ -23,7 +24,7 @@ export const api = createApi({
       return headers;
     },
   }),
-  tagTypes: ["posts", "verifyToken", "getUser", "getUserFriends"],
+  tagTypes: ["posts", "verifyToken", "getUser", "getUserFriends", "comments"],
   endpoints: (builder) => ({
     login: builder.mutation<LoginInterface, LoginInterfaceUser>({
       query: (values) => ({
@@ -74,6 +75,31 @@ export const api = createApi({
       query: (userId) => `users/${userId}`,
       providesTags: ["getUser"],
     }),
+    getPostComments: builder.query<GetCommentsInterface, string>({
+      query: (postId) => `posts/${postId}/comments`,
+      providesTags: ["comments"],
+    }),
+    postComment: builder.mutation<
+      void,
+      { postId: string; correctForm: string }
+    >({
+      query: (parameters) => ({
+        url: `posts/${parameters.postId}/comments`,
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: parameters.correctForm,
+      }),
+      invalidatesTags: ["posts", "comments"],
+    }),
+    likeComment: builder.mutation<void, string>({
+      query: (commentId) => ({
+        url: `comments/${commentId}/like`,
+        method: "POST",
+      }),
+      invalidatesTags: ["comments"],
+    }),
     verifyToken: builder.query<VerifyTokenInterface, VerifyTokenQueryInterface>(
       {
         query: () => `/verifyToken`,
@@ -94,4 +120,7 @@ export const {
   useAddFriendMutation,
   useGetUserFriendsQuery,
   useGetUserQuery,
+  useGetPostCommentsQuery,
+  usePostCommentMutation,
+  useLikeCommentMutation,
 } = api;

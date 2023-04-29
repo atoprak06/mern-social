@@ -77,3 +77,18 @@ export interface LoginInterfaceUser {
   email: string;
   password: string;
 }
+
+export interface CommentInterface {
+  _id: string;
+  __v: number;
+  userId: string;
+  updatedAt: string;
+  text: string;
+  postId: string;
+  likes: { [userId: string]: boolean };
+  createdAt: string;
+}
+
+export interface GetCommentsInterface {
+  comments: Array<CommentInterface>;
+}

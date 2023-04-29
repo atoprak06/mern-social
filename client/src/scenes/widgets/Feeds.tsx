@@ -1,6 +1,7 @@
 import { useGetFeedsQuery } from "@/api";
 import { Box, Typography } from "@mui/material";
 import Feed from "./Feed";
+import Loading from "@/components/Loading";
 
 type Props = {
   userId?: string;
@@ -8,10 +9,10 @@ type Props = {
 
 const Feeds = (props: Props) => {
   const { userId } = props;
-  const { data, isLoading, isError } = useGetFeedsQuery(userId);
+  const { data, isLoading, isError } = useGetFeedsQuery(userId || "");
 
   if (isLoading) {
-    return <Typography>Loading feeds...</Typography>;
+    return <Loading />;
   }
 
   if (isError) {
