@@ -13,6 +13,7 @@ import authRoutes from "./routes/auth.js"
 import userRoutes from "./routes/user.js"
 import postRoutes from "./routes/posts.js"
 import verifyTokenRoute from "./routes/verifyToken.js"
+import commentRoutes from "./routes/comment.js"
 import { verifyToken } from './middleware/auth.js'
 import { createPost } from './controllers/post.js'
 
@@ -50,6 +51,7 @@ app.use("/auth",authRoutes)
 app.use("/users",userRoutes)
 app.use("/posts",postRoutes)
 app.use("/verifyToken",verifyTokenRoute)
+app.use("/comments",commentRoutes)
 
 /* Mongoose Setup */ 
 const PORT = process.env.PORT || 6001
