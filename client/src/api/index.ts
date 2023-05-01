@@ -9,6 +9,7 @@ import {
   GetPostInterface,
   VerifyTokenQueryInterface,
   GetCommentsInterface,
+  GetPostInterfaceQuery,
 } from "@/api/types";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
@@ -40,9 +41,14 @@ export const api = createApi({
         body: formData,
       }),
     }),
-    getFeeds: builder.query<Array<GetPostInterface>, string>({
-      query: (userId = "") =>
-        `/posts/${userId}${userId.length > 0 ? "/posts" : ""}`,
+    getFeeds: builder.query<
+      GetPostInterfaceQuery,
+      { userId: string; page: number; limit: number }
+    >({
+      query: ({ userId = "", page = 1, limit = 12 }) =>
+        `/posts/${userId}${
+          userId.length > 0 ? "/posts" : ""
+        }?page=${page}&limit=${limit}`,
       providesTags: ["posts"],
     }),
     postPost: builder.mutation<PostInterface, FormData>({

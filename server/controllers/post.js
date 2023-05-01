@@ -32,8 +32,19 @@ export const createPost = async(req,res) => {
 
 export const getFeedPosts = async(req,res) => {
     try {
-        const posts = await Post.find().sort({createdAt:'desc'})
-        res.status(200).json(posts)
+        const page = parseInt(req.query.page) || 1;
+        const limit = parseInt(req.query.limit) || 12;
+
+        const startIndex = (page - 1) * limit;
+
+        const posts = await Post.find()
+                    .sort({ createdAt: "desc" })
+                    .skip(startIndex)
+                    .limit(limit);
+        
+        const totalPosts = await Post.countDocuments()
+       
+        res.status(200).json({posts: posts, totalPosts:totalPosts});
 
     } catch (error) {
         res.status(404).json({error:error.message})
@@ -44,8 +55,16 @@ export const getFeedPosts = async(req,res) => {
 export const getUserPost = async(req,res) => {
     try {
         const {userId} = req.params
-        const posts = await Post.find({userId:userId}).sort({createdAt:"desc"})
-        res.status(200).json(posts)
+        const page = parseInt(req.query.page) || 1;
+        const limit = parseInt(req.query.limit) || 12;
+        const startIndex = (page - 1) * limit;
+
+        const posts = await Post.find({userId:userId})
+                                .sort({createdAt:"desc"})
+                                .skip(startIndex)
+                                .limit(limit);
+        const totalPosts = await Post.countDocuments({userId:userId})
+        res.status(200).json({posts:posts,totalPosts:totalPosts})
     } catch (error) {
         res.status(404).json({error:error.message})
     }

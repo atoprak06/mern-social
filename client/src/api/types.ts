@@ -49,6 +49,11 @@ export interface GetPostInterface {
   _id: string;
 }
 
+export interface GetPostInterfaceQuery {
+  posts: Array<GetPostInterface>;
+  totalPosts: number;
+}
+
 export interface VerifyTokenInterface {
   user: UserInterface;
 }
