@@ -8,6 +8,7 @@ import { StateInterface } from "@/api/types";
 import Advertisement from "../widgets/Advertisement";
 import Friends from "../widgets/Friends";
 import Loading from "@/components/Loading";
+import { useState } from "react";
 
 const HomePageGridBigScreen = `
 "a a b b b c c"
@@ -19,6 +20,7 @@ const HomePage = () => {
   const token = useSelector<StateInterface>(
     (state) => state.persistedReducer.token
   ) as string;
+  const [newPostAdded, setNewPostAdded] = useState(false);
   const { data, isLoading, isError } = useVerifyTokenQuery({
     skip: !token,
     queryKey: ["verifyToken", token],
@@ -57,8 +59,11 @@ const HomePage = () => {
           gap={"1rem"}
           gridArea={"b"}
         >
-          <WhatsOnYourMind user={data?.user} />
-          <Feeds />
+          <WhatsOnYourMind
+            setNewPostAdded={setNewPostAdded}
+            user={data?.user}
+          />
+          <Feeds newPostAdded={newPostAdded} />
         </Box>
         <Box
           display={"flex"}

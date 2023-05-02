@@ -7,10 +7,11 @@ import { GetPostInterface } from "@/api/types";
 
 type Props = {
   userId?: string;
+  newPostAdded: boolean;
 };
 
 const Feeds = (props: Props) => {
-  const { userId } = props;
+  const { userId, newPostAdded } = props;
   const [page, setPage] = useState<number>(1);
   const limit = 12;
   const [posts, setPosts] = useState<Array<GetPostInterface>>([]);
@@ -35,7 +36,10 @@ const Feeds = (props: Props) => {
         return [
           ...prev.filter((p) => !data.posts.some((post) => post._id === p._id)),
           ...updatedPosts,
-        ];
+        ].sort(
+          (a, b) =>
+            new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+        );
       });
     }
   }, [data]);
@@ -47,7 +51,8 @@ const Feeds = (props: Props) => {
         target.isIntersecting &&
         !isFetching &&
         data?.totalPosts &&
-        posts.length < data?.totalPosts
+        posts.length < data?.totalPosts &&
+        !newPostAdded
       ) {
         setPage((prevPage) => prevPage + 1);
       }
@@ -64,7 +69,7 @@ const Feeds = (props: Props) => {
         observer.unobserve(loadMoreNode);
       }
     };
-  }, [isFetching, posts.length, data?.totalPosts]);
+  }, [isFetching, posts.length, data?.totalPosts, newPostAdded]);
 
   if (isLoading) {
     return <Loading />;
