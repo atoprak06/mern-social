@@ -43,6 +43,7 @@ const Feed = (props: Props) => {
     // set force to true to force a fresh query fetch
     force: true,
   });
+  const [newCommentAdded, setNewCommentAdded] = useState(false);
   const [showComments, setShowComments] = useState(false);
   const isUserOwnPost = token && post.userId === data?.user._id;
   const isAlreadyFriend = token && data?.user.friends.includes(post.userId);
@@ -138,8 +139,14 @@ const Feed = (props: Props) => {
         </IconButton>
       </FlexBetween>
       <Divider />
-      {showComments && <Comments postId={post._id} userId={data?.user._id} />}
-      <AddComment postId={post._id} />
+      {showComments && (
+        <Comments
+          newCommentAdded={newCommentAdded}
+          postId={post._id}
+          userId={data?.user._id}
+        />
+      )}
+      <AddComment setNewCommentAdded={setNewCommentAdded} postId={post._id} />
     </Box>
   );
 };

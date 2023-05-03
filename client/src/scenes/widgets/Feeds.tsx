@@ -17,7 +17,7 @@ const Feeds = (props: Props) => {
   const [posts, setPosts] = useState<Array<GetPostInterface>>([]);
   const { data, isLoading, isError, isFetching } = useGetFeedsQuery({
     userId: userId || "",
-    page,
+    page: newPostAdded ? 1 : page,
     limit,
   });
 
@@ -61,7 +61,7 @@ const Feeds = (props: Props) => {
     const loadMoreNode = loadMoreRef.current;
 
     if (loadMoreNode) {
-      observer.observe(loadMoreRef.current);
+      observer.observe(loadMoreNode);
     }
 
     return () => {

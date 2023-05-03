@@ -21,7 +21,12 @@ const Comment = (props: Props) => {
   if (isLoading) return <Loading />;
 
   return (
-    <Box display={"flex"} alignItems={"start"} justifyContent={"space-between"}>
+    <Box
+      width={"100%"}
+      display={"flex"}
+      alignItems={"start"}
+      justifyContent={"space-between"}
+    >
       <Box display={"flex"} gap={"1rem"}>
         <Avatar
           src={`${import.meta.env.VITE_BASE_URL}/assets/${data.picturePath}`}

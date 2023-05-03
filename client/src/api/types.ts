@@ -95,5 +95,6 @@ export interface CommentInterface {
 }
 
 export interface GetCommentsInterface {
-  comments: Array<CommentInterface>;
+  comments: { comments: Array<CommentInterface> };
+  totalComments: number;
 }

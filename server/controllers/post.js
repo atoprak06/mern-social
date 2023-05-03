@@ -91,11 +91,15 @@ export const likePost = async(req,res) => {
 export const getComments = async(req,res) => {
     try {
         const {id} = req.params
+        const page = parseInt(req.query.page) || 1
+        const limit = parseInt(req.query.limit) || 7
+        const startIndex = (page - 1) * limit 
         const comments = await Post.findById(id).select({comments:1,_id:0}).populate({
             path: "comments",
-            options: { sort: { createdAt: "desc" } },
+            options: { sort: { createdAt: "desc" },skip:startIndex,limit:limit },
           })
-        res.status(200).json(comments)
+        const totalComments = await Post.findById(id)
+        res.status(200).json({comments:comments,totalComments:totalComments.comments.length})
     } catch (error) {
         res.status(404).json({error:error.message})
     } 

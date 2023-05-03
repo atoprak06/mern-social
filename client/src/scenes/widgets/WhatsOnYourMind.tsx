@@ -23,10 +23,11 @@ import Loading from "@/components/Loading";
 
 type Props = {
   user?: UserInterface;
+  setNewPostAdded(arg0: boolean): void;
 };
 
 const WhatsOnYourMind = (props: Props) => {
-  const { user } = props;
+  const { user, setNewPostAdded } = props;
   const imageSize = "60px";
   const theme = useTheme();
   const [picture, setPicture] = useState<File>();
@@ -45,12 +46,16 @@ const WhatsOnYourMind = (props: Props) => {
     if (picture) {
       formData.append("picturePath", picture);
     }
+    setNewPostAdded(true);
     const response = await post(formData);
     if ("data" in response) {
       setPostText("");
       setShowDropZone(false);
       setPicture(undefined);
     }
+    setTimeout(() => {
+      setNewPostAdded(false);
+    }, 5000);
   };
 
   return !isLoading ? (

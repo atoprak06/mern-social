@@ -81,8 +81,12 @@ export const api = createApi({
       query: (userId) => `users/${userId}`,
       providesTags: ["getUser"],
     }),
-    getPostComments: builder.query<GetCommentsInterface, string>({
-      query: (postId) => `posts/${postId}/comments`,
+    getPostComments: builder.query<
+      GetCommentsInterface,
+      { postId: string; page: number; limit: number }
+    >({
+      query: ({ postId, page, limit }) =>
+        `posts/${postId}/comments?page=${page}&limit=${limit}`,
       providesTags: ["comments"],
     }),
     postComment: builder.mutation<

@@ -23,6 +23,7 @@ const ProfilePage = () => {
   const token = useSelector<StateInterface>(
     (state) => state.persistedReducer.token
   ) as string;
+  const [newPostAdded, setNewPostAdded] = useState(false);
   const { data: VerifyToken } = useVerifyTokenQuery({
     skip: !token,
   });
@@ -82,8 +83,10 @@ const ProfilePage = () => {
           flexDirection: "column",
         }}
       >
-        {isOwner && <WhatsOnYourMind user={User} />}
-        <Feeds userId={User._id} />
+        {isOwner && (
+          <WhatsOnYourMind user={User} setNewPostAdded={setNewPostAdded} />
+        )}
+        <Feeds userId={User._id} newPostAdded={newPostAdded} />
       </Box>
     </Box>
   );
