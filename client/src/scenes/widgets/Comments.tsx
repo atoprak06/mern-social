@@ -82,10 +82,13 @@ const Comments = (props: Props) => {
   return (
     <Box
       my={"1rem"}
+      pr={"1rem"}
       display={"flex"}
       flexDirection={"column"}
       gap={"0.5rem"}
-      sx={{ overflowY: "auto" }}
+      sx={{
+        overflowY: "auto",
+      }}
       maxHeight={"30vh"}
     >
       {comments && comments.length > 0 ? (
