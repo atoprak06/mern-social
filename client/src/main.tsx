@@ -3,6 +3,8 @@ import ReactDOM from "react-dom/client";
 import App from "./App";
 import "./index.css";
 import authReducer from "@/state/index";
+import socketReducer from "@/state/socketState";
+// import socketStateReducer from "./state/socketState";
 import { configureStore } from "@reduxjs/toolkit";
 import { Provider } from "react-redux";
 import {
@@ -23,8 +25,12 @@ import { setupListeners } from "@reduxjs/toolkit/dist/query";
 const persistConfig = { key: "root", storage, version: 1 };
 const persistedReducer = persistReducer(persistConfig, authReducer);
 
-const store = configureStore({
-  reducer: { persistedReducer, [api.reducerPath]: api.reducer },
+export const store = configureStore({
+  reducer: {
+    persistedReducer,
+    [api.reducerPath]: api.reducer,
+    socketReducer,
+  },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {

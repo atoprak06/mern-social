@@ -30,7 +30,11 @@ const Profile = (props: Props) => {
       <FlexBetween>
         <Box sx={{ display: "flex", gap: "1rem" }}>
           <Avatar
-            src={`${import.meta.env.VITE_BASE_URL}/assets/${user?.picturePath}`}
+            src={
+              user && user?.picturePath.length > 0
+                ? `${import.meta.env.VITE_BASE_URL}/assets/${user?.picturePath}`
+                : "/assets/react.svg"
+            }
             alt={user?.picturePath}
             sx={{ height: imageSize, width: imageSize }}
           />

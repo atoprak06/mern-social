@@ -10,6 +10,7 @@ import {
   VerifyTokenQueryInterface,
   GetCommentsInterface,
   GetPostInterfaceQuery,
+  ChatInterface,
 } from "@/api/types";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
@@ -25,7 +26,14 @@ export const api = createApi({
       return headers;
     },
   }),
-  tagTypes: ["posts", "verifyToken", "getUser", "getUserFriends", "comments"],
+  tagTypes: [
+    "posts",
+    "verifyToken",
+    "getUser",
+    "getUserFriends",
+    "comments",
+    "getChat",
+  ],
   endpoints: (builder) => ({
     login: builder.mutation<LoginInterface, LoginInterfaceUser>({
       query: (values) => ({
@@ -110,6 +118,24 @@ export const api = createApi({
       }),
       invalidatesTags: ["comments"],
     }),
+    getSingleChat: builder.query<ChatInterface, string>({
+      query: (selectedChat) => `chat/${selectedChat}`,
+    }),
+    getChat: builder.query<Array<ChatInterface>, VerifyTokenQueryInterface>({
+      query: () => "/chat/chats",
+      providesTags: ["getChat"],
+    }),
+    createNewChat: builder.mutation<ChatInterface, Array<string>>({
+      query: (selectedFriendsIds) => ({
+        url: "chat/newChat",
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: { selectedFriends: JSON.stringify(selectedFriendsIds) },
+      }),
+      invalidatesTags: ["getChat"],
+    }),
     verifyToken: builder.query<VerifyTokenInterface, VerifyTokenQueryInterface>(
       {
         query: () => `/verifyToken`,
@@ -133,4 +159,7 @@ export const {
   useGetPostCommentsQuery,
   usePostCommentMutation,
   useLikeCommentMutation,
+  useCreateNewChatMutation,
+  useGetChatQuery,
+  useGetSingleChatQuery,
 } = api;

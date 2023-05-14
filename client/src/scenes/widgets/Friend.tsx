@@ -23,9 +23,13 @@ const Friend = (props: Props) => {
       <FlexBetween>
         <Box display={"flex"} gap={"12px"}>
           <Avatar
-            src={`${import.meta.env.VITE_BASE_URL}/assets/${
-              friend.picturePath
-            }`}
+            src={
+              friend.picturePath.length > 0
+                ? `${import.meta.env.VITE_BASE_URL}/assets/${
+                    friend.picturePath
+                  }`
+                : "/assets/react.svg"
+            }
             sx={{ height: "3rem", width: "3rem" }}
           />
           <Box display={"flex"} flexDirection={"column"} gap={"0.3rem"}>

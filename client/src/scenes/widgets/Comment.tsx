@@ -29,7 +29,11 @@ const Comment = (props: Props) => {
     >
       <Box display={"flex"} gap={"1rem"}>
         <Avatar
-          src={`${import.meta.env.VITE_BASE_URL}/assets/${data.picturePath}`}
+          src={
+            data.picturePath.length > 0
+              ? `${import.meta.env.VITE_BASE_URL}/assets/${data.picturePath}`
+              : "/assets/react.svg"
+          }
         />
         <Box display={"flex"} gap={"0.5rem"}>
           <Typography>

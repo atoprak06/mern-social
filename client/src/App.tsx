@@ -14,7 +14,9 @@ import { StateInterface } from "@/api/types";
 import { useEffect, useMemo, useState } from "react";
 import { useVerifyTokenQuery } from "./api";
 import Navbar from "./scenes/navbar";
+import ChatPage from "./scenes/chatPage";
 import Loading from "./components/Loading";
+import { disconnetSocket, initSocket } from "./socket/socket";
 
 function App() {
   const mode = useSelector<StateInterface>(
@@ -30,10 +32,17 @@ function App() {
   });
 
   useEffect(() => {
-    if (token) {
+    if (token && token.length > 0) {
       const bool = data?.user !== null;
       setIsLogged(bool);
-    } else setIsLogged(false);
+      initSocket(token);
+    } else {
+      setIsLogged(false);
+      disconnetSocket();
+    }
+    return () => {
+      disconnetSocket();
+    };
   }, [token, data]);
 
   if (isLoading) return <Loading />;
@@ -49,6 +58,10 @@ function App() {
             <Route
               path="/profile/:userId"
               element={isLogged ? <ProfilePage /> : <LoginPage />}
+            />
+            <Route
+              path="/chat"
+              element={isLogged ? <ChatPage /> : <LoginPage />}
             />
             <Route path="*" element={<h1>Not Found</h1>} />
           </Routes>

@@ -71,9 +71,14 @@ const WhatsOnYourMind = (props: Props) => {
       <FlexBetween gap={"1rem"}>
         <Avatar
           sx={{ height: imageSize, width: imageSize }}
-          src={`${import.meta.env.VITE_BASE_URL}/assets/${user?.picturePath}`}
-        ></Avatar>
+          src={
+            user && user?.picturePath.length > 0
+              ? `${import.meta.env.VITE_BASE_URL}/assets/${user?.picturePath}`
+              : "/assets/react.svg"
+          }
+        />
         <TextField
+          autoComplete="false"
           value={postText}
           onChange={handlePostTextChange}
           fullWidth

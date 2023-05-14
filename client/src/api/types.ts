@@ -22,7 +22,12 @@ export interface AuthInterface {
   token: string | null;
 }
 
+export interface SocketStateInterface {
+  activeUsers: Array<string>;
+}
+
 export interface StateInterface {
+  socketReducer: SocketStateInterface;
   persistedReducer: AuthInterface;
   api: ApiType;
 }
@@ -97,4 +102,24 @@ export interface CommentInterface {
 export interface GetCommentsInterface {
   comments: { comments: Array<CommentInterface> };
   totalComments: number;
+}
+
+export interface MessageInterface {
+  chatId: string;
+  content: string;
+  createdAt: string;
+  sender: UserInterface;
+  updatedAt: string;
+  __v: number;
+  _id: number;
+}
+
+export interface ChatInterface {
+  _id: string;
+  participants: Array<UserInterface>;
+  messages: Array<MessageInterface>;
+  createdBy: UserInterface;
+  createdAt: string;
+  updatedAt: string;
+  __v: number;
 }

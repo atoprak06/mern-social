@@ -67,9 +67,13 @@ const Feed = (props: Props) => {
       <FlexBetween>
         <Box display={"flex"} gap={"0.7rem"}>
           <Avatar
-            src={`${import.meta.env.VITE_BASE_URL}/assets/${
-              post.userPicturePath
-            }`}
+            src={
+              post.userPicturePath.length > 0
+                ? `${import.meta.env.VITE_BASE_URL}/assets/${
+                    post.userPicturePath
+                  }`
+                : "/assets/react.svg"
+            }
             sx={{ height: imageSize, width: imageSize }}
           />
           <Box>

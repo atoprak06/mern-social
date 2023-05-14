@@ -84,6 +84,7 @@ const Navbar = () => {
           </Typography>
           {!isSmallScreen && (
             <TextField
+              autoComplete="false"
               value={searchValue}
               onChange={handleSearchValueChange}
               size="small"
@@ -133,7 +134,10 @@ const Navbar = () => {
                     </FlexBetween>
                   }
                 </IconButton>
-                <IconButton sx={{ width: "100%", borderRadius: 0 }}>
+                <IconButton
+                  onClick={() => navigate("/chat")}
+                  sx={{ width: "100%", borderRadius: 0 }}
+                >
                   <FlexBetween gap={1} alignContent={"center"}>
                     <MessageIcon />
                     <Typography variant="h6">Messages</Typography>
@@ -152,6 +156,7 @@ const Navbar = () => {
                   </FlexBetween>
                 </IconButton>
                 <TextField
+                  autoComplete="false"
                   onChange={handleSearchValueChange}
                   value={searchValue}
                   sx={{ marginX: 2 }}
@@ -191,7 +196,7 @@ const Navbar = () => {
                 <DarkModeIcon />
               )}
             </IconButton>
-            <IconButton>
+            <IconButton onClick={() => navigate("/chat")}>
               <MessageIcon />
             </IconButton>
             <IconButton>

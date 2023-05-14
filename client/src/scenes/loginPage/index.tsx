@@ -130,6 +130,7 @@ const LoginForm: React.FC = () => {
             gridTemplateColumns={"repeat(1,minmax(1fr,1fr)"}
           >
             <TextField
+              autoComplete="false"
               sx={{ gridArea: "a" }}
               id="email"
               name="email"
@@ -140,6 +141,7 @@ const LoginForm: React.FC = () => {
               helperText={formik.touched.email && formik.errors.email}
             />
             <TextField
+              autoComplete="false"
               sx={{ gridArea: "b" }}
               id="password"
               name="password"
@@ -191,6 +193,7 @@ const LoginForm: React.FC = () => {
             gridTemplateColumns={"repeat(1,minmax(0,1fr)"}
           >
             <TextField
+              autoComplete="false"
               sx={{ gridArea: "a" }}
               id="firstName"
               name="firstName"
@@ -207,6 +210,7 @@ const LoginForm: React.FC = () => {
               }
             />
             <TextField
+              autoComplete="false"
               sx={{ gridArea: "b" }}
               id="lastName"
               name="lastName"
@@ -223,6 +227,7 @@ const LoginForm: React.FC = () => {
               }
             />
             <TextField
+              autoComplete="false"
               sx={{ gridArea: "c" }}
               id="location"
               name="location"
@@ -239,6 +244,7 @@ const LoginForm: React.FC = () => {
               }
             />
             <TextField
+              autoComplete="false"
               sx={{ gridArea: "d" }}
               id="occupation"
               name="occupation"
@@ -255,6 +261,7 @@ const LoginForm: React.FC = () => {
               }
             />
             <TextField
+              autoComplete="false"
               sx={{ gridArea: "e" }}
               id="email"
               name="email"
@@ -271,6 +278,7 @@ const LoginForm: React.FC = () => {
               }
             />
             <TextField
+              autoComplete="false"
               sx={{ gridArea: "f" }}
               id="password"
               name="password"
@@ -288,6 +296,7 @@ const LoginForm: React.FC = () => {
               }
             />
             <TextField
+              autoComplete="false"
               sx={{ gridArea: "g" }}
               id="confirmPassword"
               name="confirmPassword"

@@ -9,7 +9,6 @@ import Advertisement from "../widgets/Advertisement";
 import Friends from "../widgets/Friends";
 import Loading from "@/components/Loading";
 import { useState } from "react";
-
 const HomePageGridBigScreen = `
 "a a b b b c c"
 `;

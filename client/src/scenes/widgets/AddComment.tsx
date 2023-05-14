@@ -32,6 +32,7 @@ const AddComment = (props: Props) => {
   return (
     <FlexBetween marginTop={"0.5rem"}>
       <TextField
+        autoComplete="false"
         placeholder="make a comment.."
         fullWidth
         value={commentValue}
