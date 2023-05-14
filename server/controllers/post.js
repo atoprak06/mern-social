@@ -109,7 +109,6 @@ export const postComment = async(req,res) => {
     try {
         const {id} = req.params
         const {text} = req.body
-        console.log(id,req.body)
         const newComment = new Comment({
             postId: id,
             userId: req.user.id,
