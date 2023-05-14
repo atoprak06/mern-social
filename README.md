@@ -1,5 +1,5 @@
 #   Description
-This app is created using MERN Stack and additionally some packages.
+This app is created using MERN Stack and additionally some packages. With the 'Popularity Social App', you can register as a new user and sign in, you can add new posts, like posts, add friends, remove friends, read feeds, make comments, chat with friends, i will try to improve it and add some other functionalities in the future hopefully.
 
 #   Tools
 ##  Front End
@@ -8,7 +8,8 @@ This app is created using MERN Stack and additionally some packages.
 3.  Redux-Persist - Redux Persist is used to store token as local storage on the browser
 4.  Formik - Yup - For the form values, formik is used to handle value states and errors, and for the validation of form, Yup is used.
 5.  React-Dropzone - For the picture uploading.
-6   .React-Router - For the routing.
+6.  React-Router - For the routing.
+7.  Socket-io-client - for the socket client configuration of chat functionality.
 ##  Back End
 1.  Nodemon - To simulate dev enviroment easily.
 2.  Cors - For the enabling cors.
@@ -19,6 +20,7 @@ This app is created using MERN Stack and additionally some packages.
 7.  Mongoose - Mongo ODM makes query easier for MongoDB.
 8.  Morgan - It logs http request to the terminal.
 9.  Multer - It is used to handle picture uploads.
+10. Socket-io - For the socket server configuration.
 
 #   Installation
 Pull this repo and install required packages using `npm i`, Don't forget to .env files to both `server` and `client`
@@ -27,6 +29,3 @@ This env file should include `MONGO_URL` which represents your mongo database ur
 ##  Client .env
 Client side .env includes one entry, and its `VITE_BASE_URL` which is `http://localhost:3001` in my case, you can specify port however you want. Since client side is powered using VITE, you don't need to install 'dotenv' package to use environment variables.
 
-
-# Functionality 
-With the 'Popularity Social App', you can register as a new user and sign in, you can add new posts, like posts, add friends, remove friends, read feeds currenlty, i will try to add comments section and some other stuff later.
