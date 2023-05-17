@@ -16,7 +16,7 @@ import ImageIcon from "@mui/icons-material/Image";
 import GifIcon from "@mui/icons-material/Gif";
 import AttachFileIcon from "@mui/icons-material/AttachFile";
 import MicIcon from "@mui/icons-material/Mic";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { UserInterface } from "@/api/types";
 import { usePostPostMutation } from "@/api";
 import Loading from "@/components/Loading";
@@ -33,12 +33,21 @@ const WhatsOnYourMind = (props: Props) => {
   const [picture, setPicture] = useState<File>();
   const [showDropZone, setShowDropZone] = useState(false);
   const [postText, setPostText] = useState("");
+  const [post, isLoading] = usePostPostMutation();
+
+  useEffect(() => {
+    return () => {
+      setPicture(undefined);
+      setShowDropZone(false);
+      setPostText("");
+    };
+  }, []);
+
   const handlePostTextChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newText = e.currentTarget.value;
     setPostText(newText);
   };
 
-  const [post, isLoading] = usePostPostMutation();
   const handlePost = async () => {
     const formData = new FormData();
     formData.append("userId", user?._id || "");

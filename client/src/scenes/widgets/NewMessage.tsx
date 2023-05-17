@@ -48,6 +48,13 @@ const NewMessage = (props: Props) => {
   };
 
   useEffect(() => {
+    return () => {
+      setFindFriendValue("");
+      setSelectedFriends([]);
+    };
+  }, []);
+
+  useEffect(() => {
     if (!isFetching && data && findFriendValue) {
       for (const person of data) {
         const fullName = person.firstName + " " + person.lastName;
@@ -152,7 +159,7 @@ const NewMessage = (props: Props) => {
             autoComplete="false"
             sx={{ marginTop: "1rem" }}
             fullWidth
-            label="Search.."
+            label="Search in your friends.."
             value={findFriendValue}
             onChange={handleFindFriend}
           />

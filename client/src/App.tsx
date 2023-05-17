@@ -9,7 +9,7 @@ import { themeSettings } from "./theme";
 import HomePage from "@/scenes/homePage";
 import ProfilePage from "./scenes/profilePage";
 import LoginPage from "@/scenes/loginPage/";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { StateInterface } from "@/api/types";
 import { useEffect, useMemo, useState } from "react";
 import { useVerifyTokenQuery } from "./api";
@@ -17,6 +17,7 @@ import Navbar from "./scenes/navbar";
 import ChatPage from "./scenes/chatPage";
 import Loading from "./components/Loading";
 import { disconnetSocket, initSocket } from "./socket/socket";
+import { setLogout } from "./state";
 
 function App() {
   const mode = useSelector<StateInterface>(
@@ -30,6 +31,7 @@ function App() {
   const { data, isLoading } = useVerifyTokenQuery({
     skip: !token,
   });
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (token && token.length > 0) {
@@ -41,9 +43,24 @@ function App() {
       disconnetSocket();
     }
     return () => {
+      setIsLogged(false);
       disconnetSocket();
     };
   }, [token, data]);
+
+  useEffect(() => {
+    const handleStorage = (event: StorageEvent) => {
+      if (event.key === "persist:root") {
+        dispatch(setLogout());
+      }
+    };
+
+    window.addEventListener("storage", handleStorage);
+
+    return () => {
+      window.removeEventListener("storage", handleStorage);
+    };
+  }, [dispatch]);
 
   if (isLoading) return <Loading />;
 

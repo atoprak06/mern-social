@@ -29,6 +29,13 @@ const ProfilePage = () => {
   });
 
   useEffect(() => {
+    return () => {
+      setIsOwner(false);
+      setNewPostAdded(false);
+    };
+  }, []);
+
+  useEffect(() => {
     if (token) {
       const bool = VerifyToken?.user._id === User?._id;
       setIsOwner(bool);

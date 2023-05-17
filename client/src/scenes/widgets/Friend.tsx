@@ -19,7 +19,7 @@ const Friend = (props: Props) => {
     await addFriend(`${userId}/${friend._id}`);
   };
   return (
-    <Box>
+    <Box sx={{ width: "100%" }}>
       <FlexBetween>
         <Box display={"flex"} gap={"12px"}>
           <Avatar

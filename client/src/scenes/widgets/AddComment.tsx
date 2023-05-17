@@ -2,7 +2,7 @@ import { usePostCommentMutation } from "@/api";
 import FlexBetween from "@/components/FlexBetween";
 import Loading from "@/components/Loading";
 import { Button, TextField } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 type Props = {
   postId: string;
@@ -27,6 +27,13 @@ const AddComment = (props: Props) => {
       setNewCommentAdded(false);
     }, 2000);
   };
+
+  useEffect(() => {
+    return () => {
+      setCommentValue("");
+    };
+  }, []);
+
   if (isLoading) return <Loading />;
 
   return (

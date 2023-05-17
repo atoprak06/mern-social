@@ -67,6 +67,13 @@ const ChatBox = (props: Props) => {
     }
   }, [isFetching, data]);
 
+  useEffect(() => {
+    return () => {
+      setMessagesState([]);
+      setValue("");
+    };
+  }, []);
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (value.length > 0) {

@@ -77,7 +77,7 @@ mongoose.connect(process.env.MONGO_URL,{
     /* socket config */
     const server = http.createServer(app)
     const io = new Server(server,{cors:{origin:'*'}})
-    io.use(verifySocketToken).on("connect",(socket) => handleSocket(socket,io))
+    io.use(verifySocketToken).on("connect",(socket) => handleSocket(socket,io))    
     /* */
     
     server.listen(PORT,()=>console.log(`Server Port:${PORT}`))

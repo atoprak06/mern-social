@@ -25,6 +25,13 @@ const Comments = (props: Props) => {
   });
 
   useEffect(() => {
+    return () => {
+      setPage(1);
+      setCommentsState([]);
+    };
+  }, []);
+
+  useEffect(() => {
     if (data?.comments.comments) {
       setCommentsState((prev) => {
         const updatedComments = data?.comments.comments.map((comment) => {

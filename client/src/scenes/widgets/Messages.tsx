@@ -8,7 +8,6 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import getTimeDiff from "@/utils/getTimeDiff";
 import { useEffect } from "react";
-import NewBadge from "./NewBadge";
 
 type Props = {
   setShowNewMessage(arg: boolean): void;

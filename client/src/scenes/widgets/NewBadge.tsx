@@ -16,6 +16,12 @@ const NewBadge = (props: Props) => {
   const [isActive, setIsActive] = useState(false);
 
   useEffect(() => {
+    return () => {
+      setIsActive(false);
+    };
+  }, []);
+
+  useEffect(() => {
     if (userId) {
       if (activeUsers.includes(userId)) {
         setIsActive(true);

@@ -24,6 +24,13 @@ const Feeds = (props: Props) => {
   const loadMoreRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    return () => {
+      setPosts([]);
+      setPage(1);
+    };
+  }, [userId]);
+
+  useEffect(() => {
     if (data?.posts) {
       setPosts((prev) => {
         const updatedPosts = data.posts.map((post) => {

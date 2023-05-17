@@ -21,8 +21,9 @@ import { useSelector } from "react-redux";
 import { GetPostInterface, StateInterface } from "@/api/types";
 import Comments from "./Comments";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AddComment from "./AddComment";
+import getTimeDiff from "@/utils/getTimeDiff";
 
 type Props = {
   post: GetPostInterface;
@@ -47,6 +48,13 @@ const Feed = (props: Props) => {
   const [showComments, setShowComments] = useState(false);
   const isUserOwnPost = token && post.userId === data?.user._id;
   const isAlreadyFriend = token && data?.user.friends.includes(post.userId);
+
+  useEffect(() => {
+    return () => {
+      setNewCommentAdded(false);
+      setShowComments(false);
+    };
+  }, []);
 
   const handleLike = async () => {
     await like(post._id);
@@ -93,7 +101,7 @@ const Feed = (props: Props) => {
               color={theme.palette.neutral.medium}
               variant="h6"
             >
-              {post.location}
+              {post.location} - {getTimeDiff(post.createdAt)}
             </Typography>
           </Box>
         </Box>

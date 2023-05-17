@@ -8,9 +8,16 @@ import { StateInterface } from "@/api/types";
 import Advertisement from "../widgets/Advertisement";
 import Friends from "../widgets/Friends";
 import Loading from "@/components/Loading";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+
 const HomePageGridBigScreen = `
 "a a b b b c c"
+`;
+
+const HomePageGridSmallScreen = `
+"a"
+"c"
+"b"
 `;
 
 const HomePage = () => {
@@ -27,6 +34,12 @@ const HomePage = () => {
     force: true,
   });
 
+  useEffect(() => {
+    return () => {
+      setNewPostAdded(false);
+    };
+  }, []);
+
   if (isLoading) return <Loading />;
   if (isError)
     return <Typography variant="h1">Error when fetching user data</Typography>;
@@ -42,7 +55,12 @@ const HomePage = () => {
                 gridTemplateRows: "repeat(1,minmax(40px,1fr))",
                 gridTemplateColumns: "repeat(7,minmax(40px,1fr))",
               }
-            : { display: "flex", flexDirection: "column" }
+            : {
+                display: "grid",
+                gridTemplateAreas: HomePageGridSmallScreen,
+                gridTemplateRows: "repeat(1,minmax(40px,1fr))",
+                gridTemplateColumns: "repeat(1,minmax(40px,1fr))",
+              }
         }
         height={"100%"}
         p={"1rem 6%"}

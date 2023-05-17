@@ -7,7 +7,7 @@ import {
 } from "@mui/material";
 import Messages from "../widgets/Messages";
 import ChatBox from "../widgets/ChatBox";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import NewMessage from "../widgets/NewMessage";
 import { useSelector } from "react-redux";
 import { useCreateNewChatMutation, useVerifyTokenQuery } from "@/api";
@@ -41,6 +41,13 @@ const ChatPage = (props: Props) => {
   const isSmallScreen = useMediaQuery(theme.breakpoints.down("md"));
   const [showNewMessage, setShowNewMessage] = useState(false);
   const [selectedChat, setSelectedChat] = useState<string>("");
+
+  useEffect(() => {
+    return () => {
+      setShowNewMessage(false);
+      setSelectedChat("");
+    };
+  }, []);
 
   const handleNewMessageDisplay = (e: React.MouseEvent<HTMLDivElement>) => {
     e.stopPropagation();
