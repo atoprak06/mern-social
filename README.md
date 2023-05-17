@@ -1,5 +1,6 @@
 #   Description
 This app is created using MERN Stack and additionally some packages. With the 'Popularity Social App', you can register as a new user and sign in, you can add new posts, like posts, add friends, remove friends, read feeds, make comments, chat with friends, i will try to improve it and add some other functionalities in the future hopefully.
+checkout here : https://mern-social-app-at.netlify.app/
 
 #   Tools
 ##  Front End
